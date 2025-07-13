@@ -1,0 +1,14 @@
+{
+    "CSVdataLogger1_UserNotes": "",
+    "CSVdataLogger1_NameToDisplay_UserSet": "CSV Data Logger",
+    "CSVdataLogger1_CSVfile_DirectoryPath": "//CSVfiles",
+    "CSVdataLogger1_FileNamePrefix": "CSVdataLogger1___",
+    "CSVdataLogger1_MainThread_TimeToSleepEachLoop": 1.0,
+    "CSVdataLogger1_SaveOnStartupFlag": 0,
+    "CSVdataLogger1_EnableSaveButtonFlag": 1,
+    "CSVdataLogger1_ShowSaveButtonFlag": 1,
+    "CSVdataLogger1_SimplifyDataLabelFlag": 1,
+    "CSVdataLogger1_ReubenPython3ClassObject_setup_dict_VariableEnglishNameStringsForHeaderList": ["CurrentTime_CalculatedFromMainThread",
+                                                                                                  "TorqueSensor_Value_Raw",
+                                                                                                  "TorqueSensor_Value_Filtered"]
+}
