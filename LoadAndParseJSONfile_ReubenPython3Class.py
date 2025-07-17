@@ -6,7 +6,7 @@ reuben.brewer@gmail.com
 www.reubotics.com
 
 Apache 2 License
-Software Revision A, 07/12/2025
+Software Revision B, 07/16/2025
 
 Verified working on: Python 3.11/3.12 for Windows 10, 11 64-bit and Raspberry Pi Bookworm.
 '''
@@ -62,6 +62,7 @@ class LoadAndParseJSONfile_ReubenPython3Class(FileSystemEventHandler):
         self.counter = 0
         self.CurrentTriggerTime = 0.0
         self.LastTriggerTime = 0.0
+        self.MinTimeBetweenTriggerEvents = 0.5
 
         self.ObserverObject = Observer() #Set up observer
         self.ObserverObject.start()
@@ -83,10 +84,10 @@ class LoadAndParseJSONfile_ReubenPython3Class(FileSystemEventHandler):
         for FilenameFullPath in self.FilenameFullPathsToWatchList:
             print("FilenameFullPath: " + str(FilenameFullPath))
 
-            DataDictFromJSONfile = self.LoadAndParseJSONfile(FilenameFullPath,
-                                                             USE_PassThrough0and1values_ExitProgramOtherwise_FOR_FLAGS = 1,
-                                                             PauseForInputOnExceptionFlag = 0,
-                                                             PrintInfoForDebuggingFlag = 1) #unicorn
+            DataDictFromJSONfile = LoadAndParseJSONfile_ReubenPython3Class.LoadAndParseJSONfile(FilenameFullPath,
+                                                                             USE_PassThrough0and1values_ExitProgramOtherwise_FOR_FLAGS = 1,
+                                                                             PauseForInputOnExceptionFlag = 0,
+                                                                             PrintInfoForDebuggingFlag = 1) #unicorn
 
             self.MostRecentDict[FilenameFullPath] = dict([("FilenameFullPath", FilenameFullPath),
                                                     ("EventCounter", 0),
@@ -108,7 +109,7 @@ class LoadAndParseJSONfile_ReubenPython3Class(FileSystemEventHandler):
 
         ##########################################################################################################
         ##########################################################################################################
-        print("LoadAndParseJSONfile_ReubenPython3Class __init__: self.MostRecentDict: " + self.ConvertDictToProperlyFormattedStringForPrinting(self.MostRecentDict))
+        #print("LoadAndParseJSONfile_ReubenPython3Class __init__: self.MostRecentDict: " + self.ConvertDictToProperlyFormattedStringForPrinting(self.MostRecentDict))
         self.OBJECT_CREATED_SUCCESSFULLY_FLAG = 1
         ##########################################################################################################
         ##########################################################################################################
@@ -211,7 +212,8 @@ class LoadAndParseJSONfile_ReubenPython3Class(FileSystemEventHandler):
     ##########################################################################################################
     ##########################################################################################################
     ##########################################################################################################
-    def TellWhichFileWereIn(self):
+    @staticmethod
+    def TellWhichFileWereIn():
 
         # We used to use this method, but it gave us the root calling file, not the class calling file
         # absolute_file_path = os.path.dirname(os.path.realpath(sys.argv[0]))
@@ -233,7 +235,8 @@ class LoadAndParseJSONfile_ReubenPython3Class(FileSystemEventHandler):
     ##########################################################################################################
     ##########################################################################################################
     ##########################################################################################################
-    def PassThrough0and1values_ExitProgramOtherwise(self, InputNameString, InputNumber, ExitProgramIfFailureFlag = 0):
+    @staticmethod
+    def PassThrough0and1values_ExitProgramOtherwise(InputNameString, InputNumber, ExitProgramIfFailureFlag = 0):
 
         ##########################################################################################################
         ##########################################################################################################
@@ -247,7 +250,7 @@ class LoadAndParseJSONfile_ReubenPython3Class(FileSystemEventHandler):
 
             ##########################################################################################################
             exceptions = sys.exc_info()[0]
-            print(self.TellWhichFileWereIn() + ", PassThrough0and1values_ExitProgramOtherwise Error. InputNumber '" + InputNameString + "' must be a numerical value, Exceptions: %s" % exceptions)
+            print(LoadAndParseJSONfile_ReubenPython3Class.TellWhichFileWereIn() + ", PassThrough0and1values_ExitProgramOtherwise Error. InputNumber '" + InputNameString + "' must be a numerical value, Exceptions: %s" % exceptions)
 
             ##########################
             if ExitProgramIfFailureFlag == 1:
@@ -271,7 +274,7 @@ class LoadAndParseJSONfile_ReubenPython3Class(FileSystemEventHandler):
 
             else:
 
-                print(self.TellWhichFileWereIn() + ", PassThrough0and1values_ExitProgramOtherwise Error. '" +
+                print(LoadAndParseJSONfile_ReubenPython3Class.TellWhichFileWereIn() + ", PassThrough0and1values_ExitProgramOtherwise Error. '" +
                               str(InputNameString) +
                               "' must be 0 or 1 (value was " +
                               str(InputNumber_ConvertedToFloat) +
@@ -291,7 +294,7 @@ class LoadAndParseJSONfile_ReubenPython3Class(FileSystemEventHandler):
 
             ##########################################################################################################
             exceptions = sys.exc_info()[0]
-            print(self.TellWhichFileWereIn() + ", PassThrough0and1values_ExitProgramOtherwise Error, Exceptions: %s" % exceptions)
+            print(LoadAndParseJSONfile_ReubenPython3Class.TellWhichFileWereIn() + ", PassThrough0and1values_ExitProgramOtherwise Error, Exceptions: %s" % exceptions)
 
             ##########################
             if ExitProgramIfFailureFlag == 1:
@@ -316,7 +319,8 @@ class LoadAndParseJSONfile_ReubenPython3Class(FileSystemEventHandler):
     ##########################################################################################################
     ##########################################################################################################
     ##########################################################################################################
-    def LoadAndParseJSONfile(self, JSONFilenameFullPath, USE_PassThrough0and1values_ExitProgramOtherwise_FOR_FLAGS = 1, PauseForInputOnExceptionFlag = 0, PrintInfoForDebuggingFlag = 1):
+    @staticmethod
+    def LoadAndParseJSONfile(JSONFilenameFullPath, USE_PassThrough0and1values_ExitProgramOtherwise_FOR_FLAGS = 1, PauseForInputOnExceptionFlag = 0, PrintInfoForDebuggingFlag = 1):
 
         ##########################################################################################################
         ##########################################################################################################
@@ -350,7 +354,7 @@ class LoadAndParseJSONfile_ReubenPython3Class(FileSystemEventHandler):
                 if USE_PassThrough0and1values_ExitProgramOtherwise_FOR_FLAGS == 1:
 
                     if Key.upper().find("FLAG") != -1:
-                        GlobalsDict[Key] = self.PassThrough0and1values_ExitProgramOtherwise(Key, Value)
+                        GlobalsDict[Key] = LoadAndParseJSONfile_ReubenPython3Class.PassThrough0and1values_ExitProgramOtherwise(Key, Value)
 
                     else:
                         GlobalsDict[Key] = Value
@@ -728,11 +732,7 @@ class LoadAndParseJSONfile_ReubenPython3Class(FileSystemEventHandler):
                         ######################################################
 
                         ######################################################
-                        if self.CurrentTriggerTime - self.MostRecentDict[EventSourcePath]["LastTriggerTime"] >= 0.5:
-
-                            self.MostRecentDict[EventSourcePath]["EventCounter"] = self.MostRecentDict[EventSourcePath]["EventCounter"] + 1
-                            self.MostRecentDict[EventSourcePath]["LastTriggerTime"] = self.CurrentTriggerTime
-
+                        if self.CurrentTriggerTime - self.MostRecentDict[EventSourcePath]["LastTriggerTime"] >= self.MinTimeBetweenTriggerEvents:
 
                             DataDictFromJSONfile = self.LoadAndParseJSONfile(self.MostRecentDict[EventSourcePath]["FilenameFullPath"],
                                                                              USE_PassThrough0and1values_ExitProgramOtherwise_FOR_FLAGS=1,
@@ -746,6 +746,9 @@ class LoadAndParseJSONfile_ReubenPython3Class(FileSystemEventHandler):
                                 ", EventType: " + str(EventType) +
                                 ", EventSourcePath: " + str(EventSourcePath) +
                                 "EventCounter: " + str(self.MostRecentDict[EventSourcePath]["EventCounter"]))
+
+                            self.MostRecentDict[EventSourcePath]["EventCounter"] = self.MostRecentDict[EventSourcePath]["EventCounter"] + 1
+                            self.MostRecentDict[EventSourcePath]["LastTriggerTime"] = self.CurrentTriggerTime
                         ######################################################
 
                     ##########################################################################################################

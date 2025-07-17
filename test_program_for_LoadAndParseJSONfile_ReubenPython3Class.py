@@ -6,7 +6,7 @@ reuben.brewer@gmail.com
 www.reubotics.com
 
 Apache 2 License
-Software Revision A, 07/12/2025
+Software Revision B, 07/16/2025
 
 Verified working on: Python 3.11/3.12 for Windows 10, 11 64-bit and Raspberry Pi Bookworm.
 '''
@@ -181,7 +181,7 @@ def ExitProgram_Callback(OptionalArugment = 0):
 #######################################################################################################################
 #######################################################################################################################
 #######################################################################################################################
-def CheckForJSONfileChangesAndCopyDataToGlobalsIfNeeded():
+def CheckForJSONfileChangesAndCopyDataToGlobalsIfNeeded(GlobalDictToModify):
     global LoadAndParseJSONfile_Object
     global LoadAndParseJSONfile_OPEN_FLAG
     global LoadAndParseJSONfile_MostRecentDict
@@ -211,7 +211,7 @@ def CheckForJSONfileChangesAndCopyDataToGlobalsIfNeeded():
 
                 #######################################################################################################################
                 for Key in DataDictFromJSONfile:
-                    globals()[Key] = DataDictFromJSONfile[Key]
+                    GlobalDictToModify[Key] = DataDictFromJSONfile[Key]
                 #######################################################################################################################
 
                 #######################################################################################################################
@@ -311,7 +311,7 @@ if __name__ == '__main__': #unicorn
             LoadAndParseJSONfile_OPEN_FLAG = LoadAndParseJSONfile_Object.OBJECT_CREATED_SUCCESSFULLY_FLAG
 
             if LoadAndParseJSONfile_OPEN_FLAG == 1:
-                CheckForJSONfileChangesAndCopyDataToGlobalsIfNeeded()
+                CheckForJSONfileChangesAndCopyDataToGlobalsIfNeeded(globals())
 
         except:
             exceptions = sys.exc_info()[0]
@@ -359,7 +359,7 @@ if __name__ == '__main__': #unicorn
         #######################################################################################################################
         #######################################################################################################################
         #######################################################################################################################
-        CheckForJSONfileChangesAndCopyDataToGlobalsIfNeeded()
+        CheckForJSONfileChangesAndCopyDataToGlobalsIfNeeded(globals())
         #######################################################################################################################
         #######################################################################################################################
         #######################################################################################################################
@@ -387,7 +387,8 @@ if __name__ == '__main__': #unicorn
     #######################################################################################################################
     #######################################################################################################################
     #######################################################################################################################
-    LoadAndParseJSONfile_Object.ExitProgram_Callback()
+    if LoadAndParseJSONfile_OPEN_FLAG == 1:
+        LoadAndParseJSONfile_Object.ExitProgram_Callback()
     #######################################################################################################################
     #######################################################################################################################
     #######################################################################################################################
