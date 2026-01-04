@@ -12,11 +12,11 @@ www.reubotics.com
 
 Apache 2 License
 
-Software Revision B, 07/16/2025
+Software Revision C, 12/27/2025
 
 Verified working on:
 
-Python 3.11/3.12.
+Python 3.11/3.12/13.
 
 Windows 10, 11 64-bit
 
@@ -28,10 +28,10 @@ Raspberry Pi Bookworm
 
 LoadAndParseJSONfile_ReubenPython3Class, ListOfModuleDependencies: ['watchdog.events', 'watchdog.observers']
 
-LoadAndParseJSONfile_ReubenPython3Class, ListOfModuleDependencies_TestProgram: ['keyboard']
+LoadAndParseJSONfile_ReubenPython3Class, ListOfModuleDependencies_TestProgram: ['keyboard', 'ReubenGithubCodeModulePaths']
 
 LoadAndParseJSONfile_ReubenPython3Class, ListOfModuleDependencies_NestedLayers: []
 
-LoadAndParseJSONfile_ReubenPython3Class, ListOfModuleDependencies_All:['keyboard', 'watchdog.events', 'watchdog.observers']
+LoadAndParseJSONfile_ReubenPython3Class, ListOfModuleDependencies_All:['keyboard', 'ReubenGithubCodeModulePaths', 'watchdog.events', 'watchdog.observers']
 
 ###########################
