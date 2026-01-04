@@ -4,7 +4,7 @@
     "CSVdataLogger1_CSVfile_DirectoryPath": "//CSVfiles",
     "CSVdataLogger1_FileNamePrefix": "CSVdataLogger1___",
     "CSVdataLogger1_MainThread_TimeToSleepEachLoop": 1.0,
-    "CSVdataLogger1_SaveOnStartupFlag": 0,
+    "CSVdataLogger1_SaveOnStartupFlag": 1,
     "CSVdataLogger1_EnableSaveButtonFlag": 1,
     "CSVdataLogger1_ShowSaveButtonFlag": 1,
     "CSVdataLogger1_SimplifyDataLabelFlag": 1,
